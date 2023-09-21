@@ -4,15 +4,11 @@ import { handle } from '@hono/node-server/vercel';
 const app = new Hono().basePath('/api');
 
 app.get('/', (c) => {
-  return c.json({
-    message: 'Hello from Hono!',
-  });
+  return c.body('Hello from Hono!');
 });
 
 app.post('/', (c) => {
-  return c.json({
-    message: 'Only works without body or headers in the request.',
-  });
+  return c.body('Only works without body or headers in the request.');
 });
 
 export default handle(app);
