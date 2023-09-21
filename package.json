@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.2.0",
+    "hono": "^3.6.0"
+  },
+  "devDependencies": {
+    "vercel": "^29.1.1"
+  }
+}
