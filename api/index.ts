@@ -7,8 +7,9 @@ app.get('/', (c) => {
   return c.body('Hello from Hono!');
 });
 
-app.post('/', (c) => {
-  return c.body('Only works without body or headers in the request.');
+app.post('/', async (c) => {
+  const input = await c.req.json();
+  return c.json(input);
 });
 
 export default handle(app);
