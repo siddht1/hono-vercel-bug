@@ -4,7 +4,7 @@ import { handle } from '@hono/node-server/vercel';
 const app = new Hono().basePath('/api');
 
 app.get('/', (c) => {
-  return c.json();
+  return c.body('Hello from Hono!');
 });
 
 app.post('/', async (c) => {
@@ -12,5 +12,4 @@ app.post('/', async (c) => {
   return c.json(input);
 });
 
-export default app; // Directly export the Hono application
-
+export default handle(app);
