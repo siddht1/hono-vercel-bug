@@ -12,7 +12,9 @@ console.log(c);
   const response = {
     message: 'Hello from Hono!',
    IP: ip,
-    requests: c.req,
+    IP_2: c.req.headers.get('x-real-ip'),
+    IP_3: c.req.headers.get('x-forwarded-for'),
+   IP_4: c.req.headers.get('x-vercel-forwarded-for'),
 
         latitude: c.req.headers.get('x-vercel-ip-latitude'),
     longitude: c.req.headers.get('x-vercel-ip-longitude'),
