@@ -12,6 +12,7 @@ app.get('/', (c) => {
   const response = {
     message: 'Hello from Hono!',
    IP: ip,
+    requests: c.req,
 
         latitude: c.req.headers.get('x-vercel-ip-latitude'),
     longitude: c.req.headers.get('x-vercel-ip-longitude'),
