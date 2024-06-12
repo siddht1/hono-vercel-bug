@@ -3,12 +3,18 @@ import { handle } from '@hono/node-server/vercel';
 
 const app = new Hono().basePath('/api');
 
-app.get('/', (c) => {
-  // Retrieve IP address, user-agent, and Vercel-specific headers
-  const ip = c.ip; // Direct access to IP address in Hono (may not be reliable)
-  const userAgent = c.req.headers.get('user-agent');
 
-  const vercelIPHeaders = {
+app.get('/', (c) => {
+  // Retrieve IP address and user-agent
+  const ip = c.ip;
+  const userAgent = c.req.headers.get('user-agent'); 
+
+
+  // Prepare response data
+  const response = {
+    message: 'Hello from Hono!',
+    ip,
+    userAgent,
     latitude: c.req.headers.get('x-vercel-ip-latitude'),
     longitude: c.req.headers.get('x-vercel-ip-longitude'),
     city: c.req.headers.get('x-vercel-ip-city'),
@@ -16,25 +22,7 @@ app.get('/', (c) => {
     country: c.req.headers.get('x-vercel-ip-country'),
   };
 
-  // Prepare response data
-  const response = {
-    // Prioritize Vercel-specific headers (more reliable)
-    IP: ip, // Include IP for potential reference, but prioritize Vercel headers
-    lat: vercelIPHeaders.latitude,
-    lon: vercelIPHeaders.longitude,
-    city: vercelIPHeaders.city,
-    region: vercelIPHeaders.region,
-    country: vercelIPHeaders.country,
-    UA: userAgent,
-    date_time: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
-  };
-
-  // Handle missing Vercel-specific headers gracefully (optional)
-  if (!response.lat || !response.lon) {
-    console.log('Vercel-specific location headers missing. Geocoding based on IP is not recommended in Vercel due to security restrictions.');
-  }
-
-  // Return response data as JSON
+  // Use c.json to send the data as JSON
   return c.json(response);
 });
 
