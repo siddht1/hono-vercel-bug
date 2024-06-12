@@ -13,7 +13,7 @@ app.get('/', (c) => {
     message: 'Hello from Hono!',
    IP: ip,
     requests: c.req,
-
+    IP_2: c.req.headers["x-forwarded-for"] || c.req.connection.remoteAddress,
         latitude: c.req.headers.get('x-vercel-ip-latitude'),
     longitude: c.req.headers.get('x-vercel-ip-longitude'),
     city: c.req.headers.get('x-vercel-ip-city'),
