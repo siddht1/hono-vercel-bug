@@ -11,8 +11,15 @@ app.get('/', (c) => {
   // Prepare response data
   const response = {
     message: 'Hello from Hono!',
-    ip,
-    userAgent,
+   IP: ip,
+
+        latitude: c.req.headers.get('x-vercel-ip-latitude'),
+    longitude: c.req.headers.get('x-vercel-ip-longitude'),
+    city: c.req.headers.get('x-vercel-ip-city'),
+    region: c.req.headers.get('x-vercel-ip-country-region'),
+    country: c.req.headers.get('x-vercel-ip-country'),
+   UA: userAgent,
+    date_time: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
   };
 
   // Use c.json to send the data as JSON
