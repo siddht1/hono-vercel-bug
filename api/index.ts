@@ -7,13 +7,13 @@ app.get('/', (c) => {
   // Retrieve IP address and user-agent
   const ip = c.ip;
   const userAgent = c.req.headers.get('user-agent'); // Access user-agent header
-
+console.log(c);
   // Prepare response data
   const response = {
     message: 'Hello from Hono!',
    IP: ip,
     requests: c.req,
-    IP_2: c.req.headers["x-forwarded-for"] || c.req.connection.remoteAddress,
+
         latitude: c.req.headers.get('x-vercel-ip-latitude'),
     longitude: c.req.headers.get('x-vercel-ip-longitude'),
     city: c.req.headers.get('x-vercel-ip-city'),
