@@ -12,4 +12,5 @@ app.post('/', async (c) => {
   return c.json(input);
 });
 
-export default handle(app);
+export default app; // Directly export the Hono application
+
