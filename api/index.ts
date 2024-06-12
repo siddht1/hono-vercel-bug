@@ -4,7 +4,7 @@ import { handle } from '@hono/node-server/vercel';
 const app = new Hono().basePath('/api');
 
 app.get('/', (c) => {
-  return c.json({app:'l1'});
+  return c.json();
 });
 
 app.post('/', async (c) => {
